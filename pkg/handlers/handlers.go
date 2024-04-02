@@ -37,7 +37,39 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "home.page.tpl", &models.TemplateData{})
 }
 
-// Home - is the Home page
+// Family - is the Family suite page
+func (m *Repository) Family(w http.ResponseWriter, r *http.Request) {
+	remoteIP := r.RemoteAddr
+	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+
+	render.RenderTemplate(w, "family.page.tpl", &models.TemplateData{})
+}
+
+// Business - is the Business Suite Page
+func (m *Repository) Business(w http.ResponseWriter, r *http.Request) {
+	remoteIP := r.RemoteAddr
+	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+
+	render.RenderTemplate(w, "business.page.tpl", &models.TemplateData{})
+}
+
+// Availability - is the search for availability of a suite
+func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
+	remoteIP := r.RemoteAddr
+	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+
+	render.RenderTemplate(w, "search-availability.page.tpl", &models.TemplateData{})
+}
+
+// Reservation - is the Reservation page
+func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
+	remoteIP := r.RemoteAddr
+	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+
+	render.RenderTemplate(w, "make-reservation.page.tpl", &models.TemplateData{})
+}
+
+// About - is the About Us page
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	// perform some business logic
 	stringMap := make(map[string]string)
