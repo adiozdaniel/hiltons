@@ -69,6 +69,14 @@ func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
 	render.RenderTemplate(w, "make-reservation.page.tpl", &models.TemplateData{})
 }
 
+// Contact - is the Contact page
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	remoteIP := r.RemoteAddr
+	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+
+	render.RenderTemplate(w, "contact.page.tpl", &models.TemplateData{})
+}
+
 // About - is the About Us page
 func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	// perform some business logic
