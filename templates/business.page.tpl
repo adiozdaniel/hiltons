@@ -222,7 +222,8 @@
 		<div class="row">
 			<div class="col text-center">
 				<a
-					href="/search-availability"
+					id="check-availability-button"
+					href="#!"
 					class="reserve-btn titles"
 					>Check Availability</a
 				>
@@ -231,4 +232,33 @@
 	</div>
 </div>
 
+{{ end }}
+
+{{define "js"}}
+<script>
+	document
+		.getElementById("check-availability-button")
+		.addEventListener("click", function () {
+			let html = `
+					<form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
+						<div class="form-row">
+							<div class="col">
+								<div class="form-row" id="reservation-dates-modal">
+									<div class="col">
+										<input placeholder="Arrival..." disabled required class="form-control" type="text" name="start" style="background-color: #1d1614; color: bisque;" id="start" aria-describedby="startDateHelp">
+									</div>
+									<div class="col">
+										<input placeholder="Arrival..." disabled required class="form-control" type="text" name="end" style="background-color: #1d1614; color: bisque;" id="end" aria-describedby="endDateHelp">
+									</div>
+								</div>
+							</div>
+						</div>
+					</form>
+				`;
+			attention.custom({
+				msg: html,
+				title: "Choose your dates",
+			});
+		});
+</script>
 {{ end }}

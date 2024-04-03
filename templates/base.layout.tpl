@@ -263,32 +263,6 @@
 				);
 			})();
 
-			document.getElementById("checker").addEventListener("click", function () {
-				// notify("Hey, am clicked", "success");
-				// notifyModal("success", "Do you want to continue", "success", "Cool!");
-				// attention.error({ msg: "OOops!!", icon: "error" });
-				let html = `
-					<form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
-						<div class="form-row">
-							<div class="col">
-								<div class="form-row" id="reservation-dates-modal">
-									<div class="col">
-										<input placeholder="Arrival..." disabled required class="form-control" type="text" name="start" style="background-color: #1d1614; color: bisque;" id="start" aria-describedby="startDateHelp">
-									</div>
-									<div class="col">
-										<input placeholder="Arrival..." disabled required class="form-control" type="text" name="end" style="background-color: #1d1614; color: bisque;" id="end" aria-describedby="endDateHelp">
-									</div>
-								</div>
-							</div>
-						</div>
-					</form>
-				`;
-				attention.custom({
-					msg: html,
-					title: "Choose your dates",
-				});
-			});
-
 			const elem = document.getElementById("reservation-dates");
 			const rangepicker = new DateRangePicker(elem, {
 				format: "dd-mm-yyyy",
@@ -401,6 +375,9 @@
 				};
 			}
 		</script>
+		{{block "js" .}}
+
+    {{end}}
   </body>
   </html>
 {{end}}
