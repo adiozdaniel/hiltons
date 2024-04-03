@@ -263,11 +263,6 @@
 				);
 			})();
 
-			const elem = document.getElementById("reservation-dates");
-			const rangepicker = new DateRangePicker(elem, {
-				format: "dd-mm-yyyy",
-			});
-
 			function Prompt() {
 				let toast = function (c) {
 					const { msg = "", icon = "success", position = "top-end" } = c;
