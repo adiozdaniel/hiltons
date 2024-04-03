@@ -1,21 +1,81 @@
 {{template "base" .}}
 {{define "content"}}
-<div class="container">
+<!-- Reservations content -->
+<div style="background-color: #1d1614; padding: 1em 0 0 2em; color: bisque">
 	<div class="row">
 		<div class="col">
-			<h1>This is the about page</h1>
-			<p>Please leave your contacts</p>
-			<p>Follow us on Tweeter and Facebook</p>
-
-			<p>This came from the template: {{index .StringMap "test"}}</p>
-			<p>
-				{{if ne (index .StringMap "remote_ip") ""}}
-				Your remote IP address is: {{index .StringMap "remote_ip"}}
-				{{else}}
-				Problem getting Your IP Address. Visit <a href="/">Home Page</a>
-				{{ end }}
-			</p>
+			<h1>Reservations</h1>
+			<h2>Check Reservations here</h2>
 		</div>
 	</div>
-	{{ end }}
+
+	<form
+		action=""
+		method="get"
+		novalidate
+		class="needs-validation"
+	>
+		<div class="input-group mb-1 w-50 mt-2">
+			<label
+				class="input-group-text"
+				for="rooms"
+				>Choose your package</label
+			>
+			<select
+				class="form-select"
+				id="rooms"
+				name="rooms"
+			>
+				<option value="business">Business Class</option>
+				<option value="family">Family Class</option>
+			</select>
+		</div>
+
+		<div id="reservation-dates">
+			<label
+				class="mb-1"
+				for="start"
+				>Starting Date &nbsp;</label
+			>
+			<input
+				placeholder="Arrival..."
+				required
+				class="form-control w-50"
+				type="text"
+				name="start"
+				style="background-color: #1d1614; color: bisque"
+				id="start_date"
+				aria-describedby="startDateHelp"
+			/>
+			<p class="text-center w-50">
+				<small id="startDateHelp">Please choose a date from the Calendar</small>
+			</p>
+			<label
+				class="mb-1"
+				for="end"
+				>End Date &nbsp;</label
+			>
+			<input
+				placeholder="Departure..."
+				required
+				class="form-control w-50"
+				type="text"
+				name="end"
+				style="background-color: #1d1614; color: bisque"
+				id="start_date"
+				aria-describedby="startDateHelp"
+			/>
+			<p class="text-center w-50">
+				<small id="startDateHelp">Please choose a date from the Calendar</small>
+			</p>
+		</div>
+		<button
+			class="reserve-btn titles"
+			type="submit"
+		>
+			Check Availability
+		</button>
+	</form>
 </div>
+<!-- Reservations content -->
+{{ end }}
