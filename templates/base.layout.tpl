@@ -268,25 +268,6 @@
 				format: "dd-mm-yyyy",
 			});
 
-			function notify(msg, msgType) {
-				notie.alert({
-					type: msgType, // optional, default = 4, enum: [1, 2, 3, 4, 5, 'success', 'warning', 'error', 'info', 'neutral']
-					text: msg,
-					stay: true, // optional, default = false
-					time: Number, // optional, default = 3, minimum = 1,
-					position: "top", // optional, default = 'top', enum: ['top', 'bottom']
-				});
-			}
-
-			function notifyModal(title, text, icon, confirmButtonText) {
-				Swal.fire({
-					title: title, //'Error!',
-					text: text, //'Do you want to continue',
-					icon: icon, //'error',
-					confirmButtonText: confirmButtonText, //'Cool'
-				});
-			}
-
 			function Prompt() {
 				let toast = function (c) {
 					const { msg = "", icon = "success", position = "top-end" } = c;
