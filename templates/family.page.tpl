@@ -222,7 +222,8 @@
 		<div class="row">
 			<div class="col text-center">
 				<a
-					href="/search-availability"
+					id="check-availability-button"
+					href="#!"
 					class="reserve-btn titles"
 					>Check Availability</a
 				>
