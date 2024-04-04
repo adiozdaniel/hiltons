@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/adiozdaniel/hiltons/models"
@@ -34,47 +35,40 @@ func (m *Repository) Home(w http.ResponseWriter, r *http.Request) {
 	remoteIP := r.RemoteAddr
 	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
 
-	render.RenderTemplate(w, "home.page.tpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "home.page.tpl", &models.TemplateData{})
 }
 
 // Family - is the Family suite page
 func (m *Repository) Family(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
-
-	render.RenderTemplate(w, "family.page.tpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "family.page.tpl", &models.TemplateData{})
 }
 
 // Business - is the Business Suite Page
 func (m *Repository) Business(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
-
-	render.RenderTemplate(w, "business.page.tpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "business.page.tpl", &models.TemplateData{})
 }
 
-// Availability - is the search for availability of a suite
+// Availability - handles the GET for search-availability
 func (m *Repository) Availability(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
+	render.RenderTemplate(w, r, "search-availability.page.tpl", &models.TemplateData{})
+}
 
-	render.RenderTemplate(w, "search-availability.page.tpl", &models.TemplateData{})
+// PostAvailability - handles the POST for search-availability
+func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
+	start := r.Form.Get("start")
+	end := r.Form.Get("end")
+
+	w.Write([]byte(fmt.Sprintf("Start date is %s and end date is %s", start, end)))
 }
 
 // Reservation - is the Reservation page
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
-
-	render.RenderTemplate(w, "make-reservation.page.tpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tpl", &models.TemplateData{})
 }
 
 // Contact - is the Contact page
 func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	remoteIP := r.RemoteAddr
-	m.App.Session.Put(r.Context(), "remote_ip", remoteIP)
-
-	render.RenderTemplate(w, "contact.page.tpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "contact.page.tpl", &models.TemplateData{})
 }
 
 // About - is the About Us page
@@ -87,7 +81,7 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	stringMap["remote_ip"] = remoteIP
 
 	//send data
-	render.RenderTemplate(w, "about.page.tpl", &models.TemplateData{
+	render.RenderTemplate(w, r, "about.page.tpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
 }

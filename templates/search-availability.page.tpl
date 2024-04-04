@@ -10,11 +10,16 @@
 	</div>
 
 	<form
-		action=""
-		method="get"
+		action="/search-availability"
+		method="post"
 		novalidate
 		class="needs-validation"
 	>
+		<input
+			type="hidden"
+			name="csrf_token"
+			value="{{.CSRFToken}}"
+		/>
 		<div class="input-group mb-1 w-50 mt-2">
 			<label
 				class="input-group-text"
