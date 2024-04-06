@@ -248,7 +248,7 @@
 										<input placeholder="Arrival..." disabled required class="form-control" type="text" name="start" style="background-color: #1d1614; color: bisque;" id="start" aria-describedby="startDateHelp">
 									</div>
 									<div class="col">
-										<input placeholder="Arrival..." disabled required class="form-control" type="text" name="end" style="background-color: #1d1614; color: bisque;" id="end" aria-describedby="endDateHelp">
+										<input placeholder="Departure..." disabled required class="form-control" type="text" name="end" style="background-color: #1d1614; color: bisque;" id="end" aria-describedby="endDateHelp">
 									</div>
 								</div>
 							</div>
@@ -258,6 +258,34 @@
 			attention.custom({
 				msg: html,
 				title: "Choose your dates",
+				willOpen: () => {
+					const elem = document.getElementById("reservation-dates-modal");
+					const rp = new DateRangePicker(elem, {
+						format: "dd-mm-yyyy",
+						showOnFocus: true,
+					});
+				},
+				didOpen: () => {
+					document.getElementById("start").removeAttribute("disabled");
+					document.getElementById("end").removeAttribute("disabled");
+				},
+				callback: function (results) {
+					console.log("called");
+
+					let form = document.getElementById("check-availability-form");
+					let formData = new FormData(form);
+					formData.append("csrf_token", "{{.CSRFToken}}");
+
+					fetch("/search-availability-json", {
+						method: "post",
+						body: formData,
+					})
+						.then((res) => res.json())
+						.then((data) => {
+							console.log(data.ok);
+							console.log(data.message);
+						});
+				},
 			});
 		});
 </script>

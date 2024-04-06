@@ -314,18 +314,16 @@
 				async function custom(c) {
 					const { msg = "", title = "" } = c;
 
-					const { value: formValues } = await Swal.fire({
+					const { value: results } = await Swal.fire({
 						title: title,
 						html: msg,
 						focusConfirm: false,
 						showConfirmButton: true,
 						showCancelButton: true,
 						willOpen: () => {
-							const elem = document.getElementById("reservation-dates-modal");
-							const rp = new DateRangePicker(elem, {
-								format: "dd-mm-yyyy",
-								showOnFocus: true,
-							});
+							if (c.willOpen !== undefined) {
+								c.willOpen();
+							}
 						},
 						preConfirm: () => {
 							return [
@@ -334,12 +332,24 @@
 							];
 						},
 						didOpen: () => {
-							document.getElementById("start").removeAttribute("disabled");
-							document.getElementById("end").removeAttribute("disabled");
+							if (c.didOpen !== undefined){
+								c.didOpen();
+							}
 						},
 					});
-					if (formValues) {
-						Swal.fire(JSON.stringify(formValues));
+
+					if (results) {
+						if (results.dismiss !== Swal.DismissReason.cancel){
+							if (results.value !== "") {
+								if (c.callback !== undefined) {
+									c.callback(results);
+								}
+							} else {
+								c.callback(false);
+							}
+						} else {
+							c.callback(false)
+						}
 					}
 				}
 
