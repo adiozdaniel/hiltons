@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/adiozdaniel/hiltons/pkg/config"
+	"github.com/adiozdaniel/hiltons/internal/config"
 	"github.com/justinas/nosurf"
 )
 

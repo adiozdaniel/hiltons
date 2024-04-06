@@ -3,8 +3,8 @@ package routes
 import (
 	"net/http"
 
-	"github.com/adiozdaniel/hiltons/pkg/config"
-	"github.com/adiozdaniel/hiltons/pkg/handlers"
+	"github.com/adiozdaniel/hiltons/internal/config"
+	"github.com/adiozdaniel/hiltons/internal/handlers"
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/chi/v5/middleware"
 )

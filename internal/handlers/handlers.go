@@ -6,9 +6,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/adiozdaniel/hiltons/internal/config"
+	"github.com/adiozdaniel/hiltons/internal/render"
 	"github.com/adiozdaniel/hiltons/models"
-	"github.com/adiozdaniel/hiltons/pkg/config"
-	"github.com/adiozdaniel/hiltons/pkg/render"
 )
 
 //Repo the repository used by the handlers

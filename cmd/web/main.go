@@ -6,16 +6,14 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/adiozdaniel/hiltons/pkg/config"
-	"github.com/adiozdaniel/hiltons/pkg/handlers"
-	"github.com/adiozdaniel/hiltons/pkg/render"
-	"github.com/adiozdaniel/hiltons/pkg/routes"
+	"github.com/adiozdaniel/hiltons/internal/config"
+	"github.com/adiozdaniel/hiltons/internal/handlers"
+	"github.com/adiozdaniel/hiltons/internal/render"
+	"github.com/adiozdaniel/hiltons/internal/routes"
 	"github.com/alexedwards/scs/v2"
 )
 
 const portNumber = ":8080"
-
-// var App config.AppConfig
 
 // declare a variable for session
 var session *scs.SessionManager
