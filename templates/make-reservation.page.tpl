@@ -8,6 +8,8 @@
 			<h2>Do your bookings here</h2>
 		</div>
 
+		{{$res := index .Data "reservation"}}
+
 		<div class="container">
 			<div class="col">
 				<form
@@ -34,40 +36,52 @@
 						<input type="text" name="first_name" id="first_name"
 						class="form-control
 						{{with .Form.Errors.Get "first_name"}} is-invalid {{ end }}"
-						required />
+						value="{{ $res.FirstName }}" required />
 					</div>
 
 					<div class="form-group mb-1 mt-2">
 						<label for="last_name">Last Name:</label>
-						<input
-							type="text"
-							name="last_name"
-							id="last_name"
-							class="form-control"
-							required
-						/>
+						{{with .Form.Errors.Get "last_name"}}
+						<label
+							for="last_name"
+							class="text-danger"
+							>{{.}}</label
+						>
+						{{ end }}
+						<input type="text" name="last_name" id="last_name"
+						class="form-control
+						{{with .Form.Errors.Get "last_name"}} is-invalid {{ end }}"
+						value="{{ $res.LastName }}" required />
 					</div>
 
 					<div class="form-group mb-1 mt-2">
 						<label for="email">Email Address:</label>
-						<input
-							type="email"
-							name="email"
-							id="email"
-							class="form-control"
-							required
-						/>
+						{{with .Form.Errors.Get "email"}}
+						<label
+							for="email"
+							class="text-danger"
+							>{{.}}</label
+						>
+						{{ end }}
+						<input type="email" name="email" id="email" class="form-control
+						{{with .Form.Errors.Get "email"}} is-invalid {{ end }}" value="{{
+							$res.Email
+						}}" required />
 					</div>
 
 					<div class="form-group mb-1 mt-2 mb-2">
 						<label for="phone">Phone Number:</label>
-						<input
-							type="phone"
-							name="phone"
-							id="phone"
-							class="form-control"
-							required
-						/>
+						{{with .Form.Errors.Get "phone"}}
+						<label
+							for="phone"
+							class="text-danger"
+							>{{.}}</label
+						>
+						{{ end }}
+						<input type="phone" name="phone" id="phone" class="form-control
+						{{with .Form.Errors.Get "phone"}} is-invalid {{ end }}" value="{{
+							$res.Phone
+						}}" required />
 					</div>
 					<hr />
 					<input

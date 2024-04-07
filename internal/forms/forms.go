@@ -1,8 +1,12 @@
 package forms
 
 import (
+	"fmt"
 	"net/http"
 	"net/url"
+	"strings"
+
+	"github.com/asaskevich/govalidator"
 )
 
 //Form creates a custom form struct & imbeds a url.value object
@@ -23,13 +27,40 @@ func New(data url.Values) *Form {
 	}
 }
 
+//Required checks for Form required fields
+func (f *Form) Required(fields ...string) {
+	for _, field := range fields {
+		value := f.Get(field)
+		if strings.TrimSpace(value) == "" {
+			f.Errors.Add(field, field+" cannot be blank!")
+		}
+	}
+}
+
 //Has checks if form is in post and not empty
 func (f *Form) Has(field string, r *http.Request) bool {
 	x := r.Form.Get(field)
 	if x == "" {
-		f.Errors.Add(field, "This field cannot be blank!")
+		// f.Errors.Add(field, "This field cannot be blank!")
 		return false
 	}
 
 	return true
+}
+
+//MinLength checks for field minimum length
+func (f *Form) MinLength(field string, length int, r *http.Request) bool {
+	x := r.Form.Get(field)
+	if len(x) < length {
+		f.Errors.Add(field, fmt.Sprintf("%s must be at least %d characters long", field, length))
+		return false
+	}
+	return true
+}
+
+//IsEmail checks for valid email address
+func (f *Form) IsEmail(field string) {
+	if !govalidator.IsEmail(f.Get(field)) {
+		f.Errors.Add(field, "Invalid email address")
+	}
 }
