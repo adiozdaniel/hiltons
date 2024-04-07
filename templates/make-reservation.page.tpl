@@ -10,11 +10,16 @@
 
 		<div class="col">
 			<form
-				action=""
+				action="/make-reservation"
 				method="post"
-				class="needs-validation"
+				class=""
 				novalidate
 			>
+				<input
+					type="hidden"
+					name="csrf_token"
+					value="{{.CSRFToken}}"
+				/>
 				<div class="form-group mb-1 mt-2">
 					<label for="first_name">First Name:</label>
 					<input

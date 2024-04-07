@@ -7,6 +7,7 @@ import (
 	"net/http"
 
 	"github.com/adiozdaniel/hiltons/internal/config"
+	"github.com/adiozdaniel/hiltons/internal/forms"
 	"github.com/adiozdaniel/hiltons/internal/render"
 	"github.com/adiozdaniel/hiltons/models"
 )
@@ -86,7 +87,13 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 // Reservation - is the Reservation page
 func (m *Repository) Reservation(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "make-reservation.page.tpl", &models.TemplateData{})
+	render.RenderTemplate(w, r, "make-reservation.page.tpl", &models.TemplateData{
+		Form: forms.New(nil),
+	})
+}
+
+// PostReservation - handles the posting of a reservation form
+func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 }
 
 // Contact - is the Contact page
