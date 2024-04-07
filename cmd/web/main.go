@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/gob"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,6 +11,7 @@ import (
 	"github.com/adiozdaniel/hiltons/internal/handlers"
 	"github.com/adiozdaniel/hiltons/internal/render"
 	"github.com/adiozdaniel/hiltons/internal/routes"
+	"github.com/adiozdaniel/hiltons/models"
 	"github.com/alexedwards/scs/v2"
 )
 
@@ -19,6 +21,9 @@ const portNumber = ":8080"
 var session *scs.SessionManager
 
 func main() {
+	//what the session will store
+	gob.Register(models.Reservation{})
+
 	//change this to true when in production
 	config.App.InProduction = false
 

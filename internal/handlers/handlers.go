@@ -128,11 +128,11 @@ func (m *Repository) PostReservation(w http.ResponseWriter, r *http.Request) {
 		})
 		return
 	}
-}
 
-// Contact - is the Contact page
-func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
-	render.RenderTemplate(w, r, "contact.page.tpl", &models.TemplateData{})
+	m.App.Session.Put(r.Context(), "reservation", reservation)
+
+	//redirect the user
+	http.Redirect(w, r, "/reservation-summary", http.StatusSeeOther)
 }
 
 // About - is the About Us page
@@ -147,5 +147,26 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	//send data
 	render.RenderTemplate(w, r, "about.page.tpl", &models.TemplateData{
 		StringMap: stringMap,
+	})
+}
+
+// Contact - is the Contact page
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, r, "contact.page.tpl", &models.TemplateData{})
+}
+
+//ReservationSummary
+func (m *Repository) ReservationSummary(w http.ResponseWriter, r *http.Request) {
+	reservation, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
+	if !ok {
+		log.Println("Cannot get item from session")
+		return
+	}
+
+	data := make(map[string]interface{})
+	data["reservation"] = reservation
+
+	render.RenderTemplate(w, r, "reservation-summary.page.tpl", &models.TemplateData{
+		Data: data,
 	})
 }
